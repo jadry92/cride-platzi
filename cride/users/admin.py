@@ -28,6 +28,7 @@ class CustomUserAdmin(UserAdmin):
         'modified'
     )
 
+
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
     """Profile model Admin."""
