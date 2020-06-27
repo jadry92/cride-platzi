@@ -271,3 +271,5 @@ cride/media/
 !.envs/.local/
 
 .idea/
+
+data/

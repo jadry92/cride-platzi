@@ -16,10 +16,14 @@ from cride.users.models import User, Profile
 # Utilities
 from datetime import timedelta
 import jwt
+# Serializers
+from cride.users.serializers import ProfileModelSerializer
 
 
 class UserModelSerializer(serializers.ModelSerializer):
     """User model serializer"""
+
+    profile = ProfileModelSerializer(read_only=True)
 
     class Meta:
         """Meta Class"""
@@ -30,7 +34,8 @@ class UserModelSerializer(serializers.ModelSerializer):
             'first_name',
             'last_name',
             'email',
-            'phone_number'
+            'phone_number',
+            'profile'
         )
 
 
@@ -103,7 +108,7 @@ class UserSignUpSerializer(serializers.Serializer):
     def create(self, validated_data):
         """Handel user and profile creation"""
         validated_data.pop('password_confirmation')
-        user = User.objects.create_user(**validated_data, is_verified=False)
+        user = User.objects.create_user(**validated_data, is_verified=False, is_client=True)
         Profile.objects.create(user=user)
         self.send_confirmation_email(user)
         return user
