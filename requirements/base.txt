@@ -9,7 +9,7 @@ django>=3
 
 # REST Framework
 djangorestframework
-
+django-filter
 # JWT
 pyjwt==1.7.1
 

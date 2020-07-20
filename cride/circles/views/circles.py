@@ -6,6 +6,9 @@ from rest_framework.permissions import IsAuthenticated
 # Models
 from cride.circles.models import Circle
 from cride.circles.models import Membership
+# Filter
+from rest_framework.filters import SearchFilter, OrderingFilter
+from django_filters.rest_framework import DjangoFilterBackend
 # Serializer
 from cride.circles.serializers import CircleModelSerializer
 # Permissions
@@ -21,6 +24,12 @@ class CirclesViewSet(mixins.CreateModelMixin,
 
     serializer_class = CircleModelSerializer
     lookup_field = 'slug_name'
+    # Filter
+    filter_backends = (SearchFilter, OrderingFilter, DjangoFilterBackend)
+    search_fields = ('slug_name', 'name')
+    ordering_fields = ('rides_offered', 'rides_taken', 'name', 'created', 'member_limit')
+    ordering = ('-members__count', '-rides_offered', '-rides_taken')
+    filter_fields = ('verified', 'is_limited')
 
     def get_permissions(self):
         """Assign permissions based on action"""
