@@ -1,3 +1,4 @@
 from .circles import Circle
-from .membership import Membership
-from .invitation import Invitation
+from .memberships import Membership
+from .invitations import Invitation
+

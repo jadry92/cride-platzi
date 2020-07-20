@@ -151,7 +151,8 @@ typings/
 .nfs*
 
 
-
+### VisualStudioCode template
+.vscode/
 
 
 ### Windows template

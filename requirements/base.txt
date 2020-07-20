@@ -1,7 +1,7 @@
 # Base
 pytz==2018.7
 python-slugify==1.2.6
-Pillow==5.3.0
+Pillow==6.2.0
 psycopg2==2.7.4 --no-binary psycopg2
 
 # Django
@@ -15,6 +15,13 @@ pyjwt==1.7.1
 
 # Environment
 django-environ==0.4.5
+
+# Django REST Framework
+djangorestframework==3.9.1
+django-filter==2.0.0
+
+# JWT
+pyjwt==1.7.1
 
 # Passwords security
 argon2-cffi==18.3.0

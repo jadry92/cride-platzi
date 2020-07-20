@@ -33,8 +33,7 @@ class MembershipModelSerializer(serializers.ModelSerializer):
             'user',
             'used_invitations',
             'invited_by',
-            'rides_taken', 'rides_offered',
-            'joined_at'
+            'rides_taken', 'rides_offered'
         )
 
 

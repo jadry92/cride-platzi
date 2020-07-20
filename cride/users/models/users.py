@@ -20,7 +20,7 @@ class User(CRideModel, AbstractUser):
     email = models.EmailField(
         'email address',
         unique=True,
-        max_length=254,
+        max_length=50,
         error_messages={
             'unique': 'A user with that email already exists.'
         }

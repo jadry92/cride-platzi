@@ -34,7 +34,7 @@ class RidesViewSet(mixins.CreateModelMixin,
                    viewsets.GenericViewSet):
     """Ride view set"""
 
-    permission_classes = [IsAuthenticated, IsActiveCircleMember]
+
     filter_backends = (SearchFilter, OrderingFilter)
     ordering = ('departure_date', 'arrival_date', 'available_seats')
     ordering_fields = ('departure_date', 'arrival_date', 'available_seats')
@@ -79,7 +79,7 @@ class RidesViewSet(mixins.CreateModelMixin,
     def get_queryset(self):
         """Return active circle's rides"""
         if self.action != 'finish':
-            offset = timezone.now() + timedelta(minutes=30)
+            offset = timezone.now() + timedelta(minutes=20)
 
             return self.circle.ride_set.filter(
                 departure_date__gte=offset,

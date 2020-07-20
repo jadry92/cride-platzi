@@ -24,7 +24,7 @@ class CirclesViewSet(mixins.CreateModelMixin,
 
     serializer_class = CircleModelSerializer
     lookup_field = 'slug_name'
-    # Filter
+    # Filters
     filter_backends = (SearchFilter, OrderingFilter, DjangoFilterBackend)
     search_fields = ('slug_name', 'name')
     ordering_fields = ('rides_offered', 'rides_taken', 'name', 'created', 'member_limit')

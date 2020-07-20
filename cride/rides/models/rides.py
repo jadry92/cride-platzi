@@ -30,7 +30,7 @@ class Ride(CRideModel):
     is_active = models.BooleanField(
         'active status',
         default=True,
-        help_text='Used for disabling the ride or marketing it as finished'
+        help_text='Used for disabling the ride or marking it as finished'
     )
 
     def __str__(self):

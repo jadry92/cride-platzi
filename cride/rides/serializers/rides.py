@@ -200,4 +200,3 @@ class EndRideSerializer(serializers.ModelSerializer):
         if attrs <= ride.departure_date:
             raise serializers.ValidationError('Ride has not stated yet')
         return attrs
-

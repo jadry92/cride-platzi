@@ -1,2 +1,2 @@
 from .rides import Ride
-from .rating import Rating
+from .ratings import Rating

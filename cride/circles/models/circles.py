@@ -1,5 +1,6 @@
 """ Circles models."""
 
+
 # Django
 from django.db import models
 
@@ -8,6 +9,7 @@ from cride.utils.models import CRideModel
 
 
 class Circle(CRideModel):
+
     """
     Circle model.
 
@@ -27,14 +29,15 @@ class Circle(CRideModel):
         through='circles.Membership',
         through_fields=('circle', 'user')
     )
+
     # Stats
     rides_offered = models.PositiveIntegerField(default=0)
     rides_taken = models.PositiveIntegerField(default=0)
 
     verified = models.BooleanField(
-        'verified',
+        'verified circle',
         default=False,
-        help_text='verified circles are also known as official communities'
+        help_text='Verified circles are also known as official communities.'
     )
 
     is_public = models.BooleanField(

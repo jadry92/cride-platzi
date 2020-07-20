@@ -26,9 +26,8 @@ class MembershipViewSet(mixins.ListModelMixin,
     serializer_class = MembershipModelSerializer
 
     def dispatch(self, request, *args, **kwargs):
-        """Verify that the circle exist"""
+        """Verify that the circle exists."""
         slug_name = kwargs['slug_name']
-        print(slug_name)
         self.circle = get_object_or_404(Circle, slug_name=slug_name)
         return super(MembershipViewSet, self).dispatch(request, *args, **kwargs)
 
@@ -68,7 +67,7 @@ class MembershipViewSet(mixins.ListModelMixin,
         """Retrieve a member's invitations breakdown.
 
         Will return a list containing all the members that have
-        used its invitations ans another list containing the
+        used its invitations and another list containing the
         invitations that haven't being used yet
         """
         member = self.get_object()
@@ -79,16 +78,14 @@ class MembershipViewSet(mixins.ListModelMixin,
             is_active=True
         )
 
-        unused_invitation = Invitation.objects.filter(
+        unused_invitations = Invitation.objects.filter(
             circle=self.circle,
             issued_by=request.user,
             used=False
         ).values_list('code')
+        diff = member.remaining_invitations - len(unused_invitations)
 
-        diff = member.remaining_invitations - len(unused_invitation)
-
-#        if unused_invitation:
-        invitations = [x[0] for x in unused_invitation]
+        invitations = [x[0] for x in unused_invitations]
         for i in range(0, diff):
             invitations.append(
                 Invitation.objects.create(
@@ -104,7 +101,7 @@ class MembershipViewSet(mixins.ListModelMixin,
         return Response(data)
 
     def create(self, request, *args, **kwargs):
-        """Handel member creation from invitation code."""
+        """Handle member creation from invitation code."""
         serializer = AddMemberSerializer(
             data=request.data,
             context={'circle': self.circle, 'request': request}
@@ -114,4 +111,3 @@ class MembershipViewSet(mixins.ListModelMixin,
 
         data = self.get_serializer(member).data
         return Response(data, status=status.HTTP_201_CREATED)
-
